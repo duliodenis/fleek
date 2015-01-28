@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="SJM-lv-in0">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--fleek-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
+                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="N97-au-QAg">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </mapView>
+                            <searchBar contentMode="redraw" placeholder="Search for interesting stuff" translatesAutoresizingMaskIntoConstraints="NO" id="foG-bE-58l">
+                                <rect key="frame" x="16" y="64" width="568" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="foG-bE-58l" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="2PI-lB-PCd"/>
+                            <constraint firstItem="foG-bE-58l" firstAttribute="centerX" secondItem="N97-au-QAg" secondAttribute="centerX" id="5UE-kh-N30"/>
+                            <constraint firstItem="N97-au-QAg" firstAttribute="centerY" secondItem="foG-bE-58l" secondAttribute="centerY" constant="214" id="EfM-as-Atq"/>
+                            <constraint firstItem="foG-bE-58l" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="JVE-BT-PpK"/>
+                            <constraint firstItem="N97-au-QAg" firstAttribute="leading" secondItem="foG-bE-58l" secondAttribute="trailing" constant="-584" id="OmW-GZ-8r9"/>
+                            <constraint firstItem="foG-bE-58l" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="lUh-cK-kSg"/>
+                            <constraint firstItem="N97-au-QAg" firstAttribute="top" secondItem="foG-bE-58l" secondAttribute="top" constant="-64" id="pfK-M1-nik"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="fleek" id="2UJ-CH-ulY"/>
+                    <connections>
+                        <outlet property="mapView" destination="N97-au-QAg" id="SeF-GO-KIr"/>
+                        <outlet property="searchBar" destination="foG-bE-58l" id="Htr-Cj-A1q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1318" y="357"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="SeC-yI-0SM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SJM-lv-in0" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="y6p-fW-gEg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="Is9-ZG-KrC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AtM-oR-tBb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="562" y="357"/>
+        </scene>
+    </scenes>
+</document>
