@@ -6,22 +6,31 @@
 //  Copyright (c) 2015 ddApps. All rights reserved.
 //
 
-#import "ViewController.h"
 #import <MapKit/MapKit.h>
+#import "ViewController.h"
+#import "SearchResultsViewController.h"
 
-@interface ViewController () <UISearchBarDelegate>
+
+@interface ViewController () //<UISearchBarDelegate>
 @property (nonatomic) NSDictionary *mapLocations;
 @property (nonatomic) IBOutlet MKMapView *mapView;
-@property (nonatomic) IBOutlet UISearchBar *searchBar;
+// @property (nonatomic) IBOutlet UISearchBar *searchBar;
 @end
 
 @implementation ViewController 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    /* do this in the Storyboard in IB
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchPOI)];
     self.searchBar.delegate = self;
+     
+    CGRect newBounds = self.mapView.bounds;
+    newBounds.origin.y = newBounds.origin.y + self.searchBar.bounds.size.height;
+    self.mapView.bounds = newBounds;
+
+     */
     
     self.mapLocations = @{@"name": @"ESB", @"latitude": @40.74, @"longitude": @-73.98};
     
@@ -40,38 +49,19 @@
     newRegion.span.longitudeDelta = 0.008388;
     
     [self.mapView setRegion:newRegion animated:YES];
-    
-    CGRect newBounds = self.mapView.bounds;
-    newBounds.origin.y = newBounds.origin.y + self.searchBar.bounds.size.height;
-    self.mapView.bounds = newBounds;
-}
-
-- (void)searchPOI {
-    NSLog(@"Search POI");
-   [self.searchBar becomeFirstResponder];
 }
 
 #pragma mark - UISearchBarDelegate Delegate Methods
 
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
-{
-    [searchBar resignFirstResponder];
-    
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder geocodeAddressString:searchBar.text completionHandler:^(NSArray *placemarks, NSError *error) {
-        CLPlacemark *placemark = [placemarks objectAtIndex:0];
-        MKCoordinateRegion newRegion;
-        newRegion.center.latitude = placemark.region.center.latitude;
-        newRegion.center.longitude = placemark.region.center.longitude;
-        MKCoordinateSpan span;
-        double radius = placemark.region.radius / 1000; // convert to km
-        
-        NSLog(@"[searchBarSearchButtonClicked] Radius is %f", radius);
-        span.latitudeDelta = radius / 112.0;
-        
-        newRegion.span = span;
-        
-        [self.mapView setRegion:newRegion animated:YES];
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
+    request.naturalLanguageQuery = @"Restaurants";
+    request.region = self.mapView.region;
+    MKLocalSearch *search = [[MKLocalSearch alloc] initWithRequest:request];
+    [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
+        NSLog(@"Returned MapItems = %lu", (unsigned long)response.mapItems.count);
+        SearchResultsViewController *destinationVC = [segue destinationViewController];
+        [destinationVC setSearchResults:(NSMutableArray *) response.mapItems];
     }];
 }
 
