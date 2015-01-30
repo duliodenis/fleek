@@ -6,7 +6,10 @@
 //  Copyright (c) 2015 ddApps. All rights reserved.
 //
 
+#import <MapKit/MapKit.h>
 #import "SearchResultsViewController.h"
+#import "ViewController.h"
+
 
 @interface SearchResultsViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic) IBOutlet UITableView *tableView;
@@ -19,7 +22,12 @@
     [super viewWillAppear:animated];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    NSLog (@"In ViewWillAppear searchResults count = %lu", (unsigned long)self.searchResults.count);
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTable) name:@"ReloadTableNotification" object:nil];
+}
+
+
+- (void)reloadTable {
     [self.tableView reloadData];
 }
 
@@ -38,14 +46,11 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    cell.textLabel.text = self.searchResults[indexPath.row];
+    MKMapItem *mapItem = self.searchResults[indexPath.row];
+    cell.textLabel.text = mapItem.name;
     return cell;
 }
 
-
-- (void)viewWillDisappear:(BOOL)animated {
-    NSLog(@"In viewWillDisappear searchResult count = %lu", (unsigned long)self.searchResults.count);
-}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -54,6 +59,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.searchResults.count;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    //Pushing next view
+    ViewController *mapView = [[ViewController alloc] init];
+    //cntrSecondViewController *cntrinnerService = [[cntrSecondViewController alloc] initWithNibName:@"cntrSecondViewController" bundle:nil];
+    [self.navigationController pushViewController:mapView animated:YES];
 }
 
 @end
