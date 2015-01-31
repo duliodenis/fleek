@@ -9,10 +9,12 @@
 #import <MapKit/MapKit.h>
 #import "SearchResultsViewController.h"
 #import "ViewController.h"
+#import "LocationData.h"
 
 
-@interface SearchResultsViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface SearchResultsViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic) IBOutlet UISearchBar *searchBar;
 @end
 
 @implementation SearchResultsViewController
@@ -22,6 +24,7 @@
     [super viewWillAppear:animated];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.searchBar.delegate = self;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTable) name:@"ReloadTableNotification" object:nil];
 }
@@ -32,8 +35,8 @@
 }
 
 
-- (void)setSearchResults:(NSMutableArray *)searchResults {
-    _searchResults = searchResults;
+- (void)setLocationData:(LocationData *)locationData {
+    _locationData = locationData;
 }
 
 
@@ -46,7 +49,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    MKMapItem *mapItem = self.searchResults[indexPath.row];
+    MKMapItem *mapItem = self.locationData.searchResults[indexPath.row];
     cell.textLabel.text = mapItem.name;
     return cell;
 }
@@ -58,16 +61,37 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.searchResults.count;
+    return self.locationData.searchResults.count;
 }
 
-
+/*
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [self performSegueWithIdentifier:@"ShowMap" sender:self];
+                               
+//    [self dismissViewControllerAnimated:NO completion:nil];
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+*/
 
-    //Pushing next view
-    ViewController *mapView = [[ViewController alloc] init];
-    //cntrSecondViewController *cntrinnerService = [[cntrSecondViewController alloc] initWithNibName:@"cntrSecondViewController" bundle:nil];
-    [self.navigationController pushViewController:mapView animated:YES];
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Need to reset the region of the mapView of the VC
+}
+
+#pragma mark - UISearchBarDelegate Methods
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self.searchBar resignFirstResponder];
+    
+    MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
+        request.naturalLanguageQuery = searchBar.text;
+        request.region = self.locationData.region;
+        MKLocalSearch *search = [[MKLocalSearch alloc] initWithRequest:request];
+        [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
+            NSLog(@"Returned MapItems = %lu", (unsigned long)response.mapItems.count);
+            self.locationData.searchResults = (NSMutableArray *)response.mapItems;
+            [self.tableView reloadData];
+    }];
 }
 
 @end

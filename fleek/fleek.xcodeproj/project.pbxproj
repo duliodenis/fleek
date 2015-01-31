@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C2410341A7BED7D00D407EA /* LocationData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C2410331A7BED7D00D407EA /* LocationData.m */; };
 		6C6D9E461A781A7D001B532D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6D9E451A781A7D001B532D /* main.m */; };
 		6C6D9E491A781A7D001B532D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6D9E481A781A7D001B532D /* AppDelegate.m */; };
 		6C6D9E4C1A781A7D001B532D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6D9E4B1A781A7D001B532D /* ViewController.m */; };
@@ -30,6 +31,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6C2410321A7BED7D00D407EA /* LocationData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationData.h; sourceTree = "<group>"; };
+		6C2410331A7BED7D00D407EA /* LocationData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationData.m; sourceTree = "<group>"; };
 		6C6D9E401A781A7D001B532D /* fleek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fleek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C6D9E441A781A7D001B532D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C6D9E451A781A7D001B532D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -96,6 +99,8 @@
 				6C6D9E4B1A781A7D001B532D /* ViewController.m */,
 				6CBC1C4F1A7A869E00673826 /* SearchResultsViewController.h */,
 				6CBC1C501A7A869E00673826 /* SearchResultsViewController.m */,
+				6C2410321A7BED7D00D407EA /* LocationData.h */,
+				6C2410331A7BED7D00D407EA /* LocationData.m */,
 				6C6D9E501A781A7D001B532D /* Images.xcassets */,
 				6C6D9E521A781A7D001B532D /* LaunchScreen.xib */,
 				6C6D9E431A781A7D001B532D /* Supporting Files */,
@@ -247,6 +252,7 @@
 			files = (
 				6C6D9E4C1A781A7D001B532D /* ViewController.m in Sources */,
 				6C6D9E491A781A7D001B532D /* AppDelegate.m in Sources */,
+				6C2410341A7BED7D00D407EA /* LocationData.m in Sources */,
 				6C6D9E461A781A7D001B532D /* main.m in Sources */,
 				6CBC1C511A7A869E00673826 /* SearchResultsViewController.m in Sources */,
 			);

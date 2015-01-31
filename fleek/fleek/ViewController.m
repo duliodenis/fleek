@@ -14,6 +14,7 @@
 @interface ViewController ()
 @property (nonatomic) NSDictionary *mapLocations;
 @property (nonatomic) IBOutlet MKMapView *mapView;
+@property (nonatomic) LocationData *locationData;
 @end
 
 @implementation ViewController 
@@ -33,16 +34,25 @@
 }
 
 
+- (void)updateRegion:(LocationData *)locationData {
+    self.locationData = locationData;
+}
+
 #pragma mark - Segue Method
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
     request.naturalLanguageQuery = @"Restaurants";
     request.region = self.mapView.region;
+    
+    LocationData *locationData = [[LocationData alloc] init];
+    locationData.region = self.mapView.region;
+    
     MKLocalSearch *search = [[MKLocalSearch alloc] initWithRequest:request];
     [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
         SearchResultsViewController *destinationVC = [segue destinationViewController];
-        [destinationVC setSearchResults:(NSMutableArray *) response.mapItems];
+        locationData.searchResults = (NSMutableArray *)response.mapItems;
+        [destinationVC setLocationData:locationData];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
     }];
 }

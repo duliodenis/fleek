@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LocationData.h"
 
 @interface ViewController : UIViewController
 
+- (void)updateRegion:(LocationData *)locationData;
 
 @end
 

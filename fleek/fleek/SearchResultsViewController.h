@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LocationData.h"
 
 @interface SearchResultsViewController : UIViewController
 
-@property (nonatomic) NSMutableArray *searchResults;
-- (void)setSearchResults:(NSMutableArray *)searchResults;
+@property (nonatomic) LocationData *locationData;
+- (void)setLocationData:(LocationData *)locationData;
 @end
