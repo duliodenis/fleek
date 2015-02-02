@@ -13,7 +13,6 @@
 
 @interface ViewController ()
 @property (nonatomic) NSDictionary *mapLocations;
-@property (nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic) LocationData *locationData;
 @end
 

@@ -7,6 +7,7 @@
 //
 
 #import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 #import "SearchResultsViewController.h"
 #import "ViewController.h"
 #import "LocationData.h"
@@ -19,6 +20,8 @@
 
 @implementation SearchResultsViewController
 
+
+#pragma mark - ViewL:ifecycle Methods
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -64,19 +67,27 @@
     return self.locationData.searchResults.count;
 }
 
-/*
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    [self performSegueWithIdentifier:@"ShowMap" sender:self];
-                               
-//    [self dismissViewControllerAnimated:NO completion:nil];
-//    [self.navigationController popToRootViewControllerAnimated:YES];
-}
-*/
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Need to reset the region of the mapView of the VC
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger myVCIndex = [self.navigationController.viewControllers indexOfObject:self];
+    ViewController *mapVC = [self.navigationController.viewControllers objectAtIndex:myVCIndex-1];
+    
+    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+    MKMapItem *mapItem = self.locationData.searchResults[indexPath.row];
+    MKPlacemark *placemark = mapItem.placemark;
+    CLLocationCoordinate2D coordinate = placemark.coordinate;
+    [annotation setCoordinate:coordinate];
+    
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(placemark.coordinate, 2000, 2000);
+    
+    [mapVC.mapView setRegion:region animated:YES];
+    [mapVC.mapView addAnnotation:placemark];
+    //[mapVC.mapView addAnnotation:annotation];
+
+    [self dismissViewControllerAnimated:NO completion:nil];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
+
 
 #pragma mark - UISearchBarDelegate Methods
 
@@ -88,7 +99,6 @@
         request.region = self.locationData.region;
         MKLocalSearch *search = [[MKLocalSearch alloc] initWithRequest:request];
         [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
-            NSLog(@"Returned MapItems = %lu", (unsigned long)response.mapItems.count);
             self.locationData.searchResults = (NSMutableArray *)response.mapItems;
             [self.tableView reloadData];
     }];

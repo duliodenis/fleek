@@ -11,6 +11,7 @@
 
 @interface ViewController : UIViewController
 
+@property (nonatomic) IBOutlet MKMapView *mapView;
 - (void)updateRegion:(LocationData *)locationData;
 
 @end
