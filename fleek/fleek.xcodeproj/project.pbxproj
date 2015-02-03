@@ -18,6 +18,7 @@
 		6C6D9E6A1A781A96001B532D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C6D9E691A781A96001B532D /* MapKit.framework */; };
 		6C6D9E6C1A781AC2001B532D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C6D9E6B1A781AC2001B532D /* CoreLocation.framework */; };
 		6CBC1C511A7A869E00673826 /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBC1C501A7A869E00673826 /* SearchResultsViewController.m */; };
+		6CCEE71B1A814C9F000BCFCA /* LocationAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCEE71A1A814C9F000BCFCA /* LocationAnnotationView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,8 @@
 		6C6D9E6B1A781AC2001B532D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		6CBC1C4F1A7A869E00673826 /* SearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsViewController.h; sourceTree = "<group>"; };
 		6CBC1C501A7A869E00673826 /* SearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsViewController.m; sourceTree = "<group>"; };
+		6CCEE7191A814C9F000BCFCA /* LocationAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationAnnotationView.h; sourceTree = "<group>"; };
+		6CCEE71A1A814C9F000BCFCA /* LocationAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationAnnotationView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +102,8 @@
 				6C6D9E4B1A781A7D001B532D /* ViewController.m */,
 				6CBC1C4F1A7A869E00673826 /* SearchResultsViewController.h */,
 				6CBC1C501A7A869E00673826 /* SearchResultsViewController.m */,
+				6CCEE7191A814C9F000BCFCA /* LocationAnnotationView.h */,
+				6CCEE71A1A814C9F000BCFCA /* LocationAnnotationView.m */,
 				6C2410321A7BED7D00D407EA /* LocationData.h */,
 				6C2410331A7BED7D00D407EA /* LocationData.m */,
 				6C6D9E501A781A7D001B532D /* Images.xcassets */,
@@ -254,6 +259,7 @@
 				6C6D9E491A781A7D001B532D /* AppDelegate.m in Sources */,
 				6C2410341A7BED7D00D407EA /* LocationData.m in Sources */,
 				6C6D9E461A781A7D001B532D /* main.m in Sources */,
+				6CCEE71B1A814C9F000BCFCA /* LocationAnnotationView.m in Sources */,
 				6CBC1C511A7A869E00673826 /* SearchResultsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

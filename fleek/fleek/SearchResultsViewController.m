@@ -11,6 +11,7 @@
 #import "SearchResultsViewController.h"
 #import "ViewController.h"
 #import "LocationData.h"
+#import "LocationAnnotationView.h"
 
 
 @interface SearchResultsViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
@@ -72,7 +73,8 @@
     NSInteger myVCIndex = [self.navigationController.viewControllers indexOfObject:self];
     ViewController *mapVC = [self.navigationController.viewControllers objectAtIndex:myVCIndex-1];
     
-    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+    // MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+    LocationAnnotationView *annotation = [[LocationAnnotationView alloc] init];
     MKMapItem *mapItem = self.locationData.searchResults[indexPath.row];
     MKPlacemark *placemark = mapItem.placemark;
     CLLocationCoordinate2D coordinate = placemark.coordinate;
@@ -81,8 +83,11 @@
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(placemark.coordinate, 2000, 2000);
     
     [mapVC.mapView setRegion:region animated:YES];
-    [mapVC.mapView addAnnotation:placemark];
-    //[mapVC.mapView addAnnotation:annotation];
+    //[mapVC.mapView addAnnotation:placemark];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [mapVC.mapView addAnnotation:annotation];
+    });
 
     [self dismissViewControllerAnimated:NO completion:nil];
     [self.navigationController popToRootViewControllerAnimated:YES];

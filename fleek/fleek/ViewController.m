@@ -9,6 +9,7 @@
 #import <MapKit/MapKit.h>
 #import "ViewController.h"
 #import "SearchResultsViewController.h"
+#import "LocationAnnotationView.h"
 
 
 @interface ViewController ()
@@ -36,6 +37,56 @@
 - (void)updateRegion:(LocationData *)locationData {
     self.locationData = locationData;
 }
+
+
+#pragma mark - Annotation Methods
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    if ([annotation isKindOfClass:[MKUserLocation class]])
+    {
+        NSLog(@"User Location");
+        return nil;
+    }
+    else if ([annotation isKindOfClass:[LocationAnnotationView class]])
+    {
+        static NSString * const identifier = @"MyCustomAnnotation";
+        NSLog(@"Custom Annotation");
+        MKAnnotationView* annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        
+        if (annotationView)
+        {
+            annotationView.annotation = annotation;
+        }
+        else
+        {
+            annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation
+                                                          reuseIdentifier:identifier];
+        }
+        
+        annotationView.canShowCallout = NO;
+        annotationView.image = [UIImage imageNamed:@"Atomic"];
+        
+        return annotationView;
+    }
+    return nil;
+}
+
+/*
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    [mapView deselectAnnotation:view.annotation animated:YES];
+    
+    DetailsViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailsPopover"];
+    controller.annotation = view.annotation; // thinking of having a property in the view controller for whatever data it needs to present the annotation's details
+    
+    self.popover = [[UIPopoverController alloc] initWithContentViewController:controller];
+    self.popover.delegate = self;
+    
+    [self.popover presentPopoverFromRect:view.frame
+                                  inView:view.superview
+                permittedArrowDirections:UIPopoverArrowDirectionAny
+                                animated:YES];
+}
+*/
 
 #pragma mark - Segue Method
 
