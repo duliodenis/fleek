@@ -7,6 +7,8 @@
 //
 
 #import <MapKit/MapKit.h>
+#import <Parse/Parse.h>
+#import "AppDelegate.h"
 #import "ViewController.h"
 #import "SearchResultsViewController.h"
 #import "LocationAnnotationView.h"
@@ -22,6 +24,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Get current location
+    
+    
+    // query test for the ESB
+    PFQuery *userQuery = [PFUser query];
+    PFQuery *poi= [PFQuery queryWithClassName:@"POI"];
+    
+    [userQuery findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
+        for (PFObject *user in users) {
+            PFObject *poi = user[@"POI"];
+            // pull out POI for the user here
+        }
+    }];
+
+    /*
     self.mapLocations = @{@"name": @"ESB", @"latitude": @40.74, @"longitude": @-73.98};
 
     MKCoordinateRegion newRegion;
@@ -31,6 +49,18 @@
     newRegion.span.longitudeDelta = 0.008388;
     
     [self.mapView setRegion:newRegion animated:YES];
+*/
+    CLAuthorizationStatus authorizationStatus = [CLLocationManager authorizationStatus];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if (authorizationStatus == kCLAuthorizationStatusAuthorizedAlways ||
+        authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        
+        [appDelegate.locationManager startUpdatingLocation];
+        self.mapView.showsUserLocation = YES;
+    }
+    
+    
 }
 
 
