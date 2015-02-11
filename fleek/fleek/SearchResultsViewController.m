@@ -9,7 +9,7 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "SearchResultsViewController.h"
-#import "ViewController.h"
+#import "MapViewController.h"
 #import "LocationData.h"
 #import "LocationAnnotationView.h"
 
@@ -71,7 +71,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger myVCIndex = [self.navigationController.viewControllers indexOfObject:self];
-    ViewController *mapVC = [self.navigationController.viewControllers objectAtIndex:myVCIndex-1];
+    MapViewController *mapVC = [self.navigationController.viewControllers objectAtIndex:myVCIndex-1];
     
     // MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
     LocationAnnotationView *annotation = [[LocationAnnotationView alloc] init];
