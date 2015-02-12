@@ -23,40 +23,56 @@
     // LocationManager to enable reporting the user's position
     if ( [CLLocationManager locationServicesEnabled] ) {
         self.locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.delegate = self;
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
         
         // New in iOS 8
         if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
             [self.locationManager requestWhenInUseAuthorization];
+            
+            CLAuthorizationStatus authorizationStatus = [CLLocationManager authorizationStatus];
+            if (authorizationStatus == kCLAuthorizationStatusAuthorizedAlways ||
+                authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse) {
+                
+                [self.locationManager startUpdatingLocation];
+                self.mapView.showsUserLocation = YES;
+            }
+            
+            self.locationManager.distanceFilter = 1000;
+            [self.locationManager startUpdatingLocation];
+            
+            CLLocationCoordinate2D center = CLLocationCoordinate2DMake(40.75, -73.98);
+            CLLocationDistance radius = 30.0;
+            
+            CLCircularRegion *region2 = [[CLCircularRegion alloc] initWithCenter:center
+                                                                          radius:radius
+                                                                      identifier:@"userRegion"];
+            
+            MKCoordinateSpan span = MKCoordinateSpanMake(10, 10);
+            MKCoordinateRegion region = MKCoordinateRegionMake(center, span);
+            [self.mapView setRegion:region animated:YES];
+            
+            if ( [CLLocationManager isMonitoringAvailableForClass:[region2 class]] ) {
+                // Apple's documentation says to check authorization after determining monitoring is available.
+                //            CLLocationAccuracy accuracy = 1.0;
+                //            [self.locationManager startMonitoringForRegion:region desiredAccuracy:accuracy];
+                NSLog(@"Region monitoring available.");
+            } else {
+                NSLog(@"Warning: Region monitoring not supported on this device."); }
         }
         
-        self.locationManager.delegate = self;
-        self.locationManager.distanceFilter = 1000;
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
-        [self.locationManager startUpdatingLocation];
         
-        CLLocationCoordinate2D center = CLLocationCoordinate2DMake(50.72451, -3.52788);
-        CLLocationDistance radius = 30.0;
-        
-        CLCircularRegion *region = [[CLCircularRegion alloc] initWithCenter:center
-                                                                     radius:radius
-                                                                 identifier:@"userRegion"];
-        
-        if ( [CLLocationManager isMonitoringAvailableForClass:[region class]] ) {
-            // Apple's documentation says to check authorization after determining monitoring is available.
-            //            CLLocationAccuracy accuracy = 1.0;
-            //            [self.locationManager startMonitoringForRegion:region desiredAccuracy:accuracy];
-            NSLog(@"Region monitoring available.");
-        } else {
-            NSLog(@"Warning: Region monitoring not supported on this device."); }
     }
     
-    CLAuthorizationStatus authorizationStatus = [CLLocationManager authorizationStatus];
-    if (authorizationStatus == kCLAuthorizationStatusAuthorizedAlways ||
-        authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse) {
-        
-        [self.locationManager startUpdatingLocation];
-        self.mapView.showsUserLocation = YES;
-    }
+    
+    
+}
+
+- (void)setMapRegion:(CLLocation *)location {
+    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
+    MKCoordinateSpan span = MKCoordinateSpanMake(0.01, 0.01);
+    MKCoordinateRegion region = MKCoordinateRegionMake(center, span);
+    [self.mapView setRegion:region animated:YES];
 }
 
 #pragma mark - LocationManager Delegate Methods
@@ -69,6 +85,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     CLLocation *newLocation = [locations lastObject];
+    [self setMapRegion:newLocation];
     NSLog(@"Locations Updated to: %@", newLocation);
 }
 
