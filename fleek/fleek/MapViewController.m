@@ -15,6 +15,7 @@
 @property (nonatomic) CLLocationManager *locationManager;
 @end
 
+
 @implementation MapViewController
 
 - (void)viewDidLoad {
@@ -60,13 +61,9 @@
             } else {
                 NSLog(@"Warning: Region monitoring not supported on this device."); }
         }
-        
-        
     }
-    
-    
-    
 }
+
 
 - (void)setMapRegion:(CLLocation *)location {
     CLLocationCoordinate2D center = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
@@ -75,19 +72,14 @@
     [self.mapView setRegion:region animated:YES];
 }
 
+
 #pragma mark - LocationManager Delegate Methods
-
-//- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation
-//           fromLocation:(CLLocation *)oldLocation {
-//    NSLog(@"Location: %@", [newLocation description]);
-//}
-
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     CLLocation *newLocation = [locations lastObject];
     [self setMapRegion:newLocation];
-    NSLog(@"Locations Updated to: %@", newLocation);
 }
+
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     NSLog(@"Error: %@", [error description]);

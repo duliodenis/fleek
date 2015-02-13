@@ -8,9 +8,15 @@
 
 #import <MapKit/MapKit.h>
 
-@interface LocationAnnotationView : MKAnnotationView <MKAnnotation>
+@interface LocationAnnotationView : NSObject <MKAnnotation>
 
-@property (nonatomic) float stickerColor;
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
+
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *subtitle;
+
++ (id)annotationWithCoordinate:(CLLocationCoordinate2D)coord;
+- (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate;
+- (id)initWithPlacemark:(MKPlacemark *)placemark;
 
 @end

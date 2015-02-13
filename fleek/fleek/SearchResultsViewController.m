@@ -73,17 +73,13 @@
     NSInteger myVCIndex = [self.navigationController.viewControllers indexOfObject:self];
     MapViewController *mapVC = [self.navigationController.viewControllers objectAtIndex:myVCIndex-1];
     
-    // MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-    LocationAnnotationView *annotation = [[LocationAnnotationView alloc] init];
     MKMapItem *mapItem = self.locationData.searchResults[indexPath.row];
     MKPlacemark *placemark = mapItem.placemark;
-    CLLocationCoordinate2D coordinate = placemark.coordinate;
-    [annotation setCoordinate:coordinate];
+    
+    LocationAnnotationView *annotation = [[LocationAnnotationView alloc] initWithPlacemark:placemark];
     
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(placemark.coordinate, 2000, 2000);
-    
     [mapVC.mapView setRegion:region animated:YES];
-    //[mapVC.mapView addAnnotation:placemark];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [mapVC.mapView addAnnotation:annotation];
