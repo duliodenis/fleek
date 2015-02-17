@@ -68,7 +68,7 @@
         }
     }
     
-    [self loadPointsOfInterest];
+    [self loadPOIs];
 }
 
 
@@ -82,22 +82,67 @@
 
 #pragma mark - Parse POI Save and Load Methods
 
-- (void)loadPointsOfInterest {
-    // PFQuery for user's POI
+- (void)loadPOIs {
+    PFQuery *query = [PFQuery queryWithClassName:@"POI"];
+    PFUser *user = [PFUser currentUser];
+    [query whereKey:@"user" equalTo:user];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            [self makePinInMap:objects];
+        } else {
+            NSString *errorString = [[error userInfo] objectForKey:@"error"];
+            NSLog(@"Error: %@", errorString);
+        }
+    }];
 }
 
 
-- (void)savePointOfInterest {
+- (void)savePOIs {
+    PFUser *user = [PFUser currentUser];
     PFObject *poi = [PFObject objectWithClassName:@"POI"];
-    [poi setObject:self.currentAnnotation.title forKey:@"Name"];
-//    [poi setObject:self.currentAnnotation.coordinate forKey:@"coordinate"];
+    [poi setObject:self.currentAnnotation.title forKey:@"name"];
+    [poi setObject:self.currentAnnotation.subtitle forKey:@"subtitle"];
+    [poi setObject:user forKey:@"user"];
+/*
+    NSNumber *latituteNumber = [NSNumber numberWithDouble:self.currentAnnotation.coordinate.latitude];
+    NSNumber *longitudeNumber = [NSNumber numberWithDouble:self.currentAnnotation.coordinate.longitude];
+    [poi setObject:latituteNumber forKey:@"Latitude"];
+    [poi setObject:longitudeNumber forKey:@"Longitude"];
+*/
+    PFGeoPoint *locationCoordinate = [PFGeoPoint new];
+    locationCoordinate.longitude = self.currentAnnotation.coordinate.longitude;
+    locationCoordinate.latitude = self.currentAnnotation.coordinate.latitude;
+    [poi setObject:locationCoordinate forKey:@"coordinate"];
+    
     [poi saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
-            NSLog(@"Success");
+            NSLog(@"Save to Parse Successful.");
         } else {
-            NSLog(@"Failure");
+            NSLog(@"Save to Parse Failure.");
         }
     }];
+}
+
+
+#pragma mark - Helper Map Methods
+
+- (void)makePinInMap:(NSArray*)pins {
+    for (PFObject *pin in pins) {
+        PFGeoPoint *locationCoordinate = [pin objectForKey:@"coordinate"];
+        
+        CLLocationDegrees latitude = locationCoordinate.latitude;
+        CLLocationDegrees longitude = locationCoordinate.longitude;
+        
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude, longitude);
+        LocationAnnotationView *annotation = [[LocationAnnotationView alloc] initWithCoordinate:coordinate];
+        annotation.title = [pin objectForKey:@"name"];
+        annotation.subtitle = [pin objectForKey:@"subtitle"];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.mapView addAnnotation:annotation];
+        });
+    }
 }
 
 
@@ -110,7 +155,7 @@
 
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    NSLog(@"Error: %@", [error description]);
+    NSLog(@"Location Manager Error: %@", [error description]);
 }
 
 
@@ -188,7 +233,7 @@
         self.currentAnnotation = nil;
     }
     else {
-        [self savePointOfInterest];
+        [self savePOIs];
     }
 }
 
