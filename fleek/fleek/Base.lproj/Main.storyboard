@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="SJM-lv-in0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Xac-Cu-G7J">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
@@ -23,6 +23,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="fleek" id="2UJ-CH-ulY">
+                        <barButtonItem key="leftBarButtonItem" image="hamburger-icon" id="DPR-04-G37"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="RDf-Pi-Lfx">
                             <connections>
                                 <segue destination="seh-nA-5mL" kind="show" id="EPG-ba-dHn"/>
@@ -31,6 +32,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="N97-au-QAg" id="SeF-GO-KIr"/>
+                        <outlet property="menuBarButton" destination="DPR-04-G37" id="hbT-Vo-Nkv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -88,6 +90,62 @@
             </objects>
             <point key="canvasLocation" x="2035" y="-59"/>
         </scene>
+        <!--Reveal View Controller-->
+        <scene sceneID="njj-hb-fNF">
+            <objects>
+                <viewController id="Xac-Cu-G7J" customClass="SWRevealViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RA4-Oe-brE"/>
+                        <viewControllerLayoutGuide type="bottom" id="WeN-SP-c6G"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8Ci-VN-C3d">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="SJM-lv-in0" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="dDr-e9-Rno"/>
+                        <segue destination="awR-er-ech" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="iMt-01-Cmq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="omc-G1-mLl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-191" y="-439"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="ft2-CV-03h">
+            <objects>
+                <tableViewController id="awR-er-ech" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rzV-4P-GWv">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="JSx-Co-dWJ" style="IBUITableViewCellStyleDefault" id="aPW-aS-GGd">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aPW-aS-GGd" id="XMN-X2-sz7">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JSx-Co-dWJ">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="awR-er-ech" id="XzD-Jq-FLS"/>
+                            <outlet property="delegate" destination="awR-er-ech" id="ujM-k7-lX9"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i5C-4R-ucv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="566" y="-739"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="SeC-yI-0SM">
             <objects>
@@ -107,4 +165,7 @@
             <point key="canvasLocation" x="566" y="-59"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="hamburger-icon" width="22" height="22"/>
+    </resources>
 </document>

@@ -12,10 +12,12 @@
 #import "LocationData.h"
 #import "SearchResultsViewController.h"
 #import "LocationAnnotationView.h"
+#import "SWRevealViewController.h"
 
-@interface MapViewController () <CLLocationManagerDelegate, MKMapViewDelegate, UIAlertViewDelegate>
+@interface MapViewController () <CLLocationManagerDelegate, MKMapViewDelegate, UIAlertViewDelegate, SWRevealViewControllerDelegate>
 @property (nonatomic) CLLocationManager *locationManager;
 @property (nonatomic) LocationAnnotationView *currentAnnotation;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *menuBarButton;
 @end
 
 
@@ -25,6 +27,11 @@
     [super viewDidLoad];
     self.currentAnnotation = nil;
     self.mapView.delegate = self;
+    
+    // The Menu Bar Button
+    self.revealViewController.delegate = self;
+    self.menuBarButton.target = self.revealViewController;
+    self.menuBarButton.action = @selector(revealToggle:);
     
     // LocationManager to enable reporting the user's position
     if ( [CLLocationManager locationServicesEnabled] ) {
