@@ -12,20 +12,62 @@
                         <viewControllerLayoutGuide type="top" id="Rct-Fe-OH8"/>
                         <viewControllerLayoutGuide type="bottom" id="vQm-N7-AQp"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="MCe-BE-CJS">
+                    <view key="view" alpha="0.69999999999999973" contentMode="scaleToFill" id="MCe-BE-CJS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select a name to use on fleek" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfs-QI-EUW">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Select a name to use on fleek" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfs-QI-EUW">
                                 <rect key="frame" x="187" y="72" width="227" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="3Kb-Yv-GOa"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="3Kb-Yv-GOa"/>
+                                    </mask>
+                                </variation>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ted-8i-cyA">
+                                <rect key="frame" x="277" y="155" width="51" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="AhI-ay-TSI"/>
+                                </constraints>
+                                <state key="normal" title="Update">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="AhI-ay-TSI"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="updateNickname:" destination="3qz-Fm-JZk" eventType="touchUpInside" id="eqy-WW-Jrh"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a nickname" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ehg-4Z-91x">
+                                <rect key="frame" x="187" y="117" width="227" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="landscape-with-pin" translatesAutoresizingMaskIntoConstraints="NO" id="gBi-99-LYf">
+                                <rect key="frame" x="0.0" y="272" width="600" height="328"/>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.81960784313725488" green="0.90196078431372551" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Ehg-4Z-91x" firstAttribute="top" secondItem="hfs-QI-EUW" secondAttribute="bottom" constant="-1" id="LQ0-ds-K0T"/>
+                            <constraint firstItem="hfs-QI-EUW" firstAttribute="top" secondItem="Rct-Fe-OH8" secondAttribute="bottom" constant="8" id="O3F-lu-VGA"/>
+                            <constraint firstAttribute="centerY" secondItem="hfs-QI-EUW" secondAttribute="centerY" constant="205" id="ozi-vC-Yfc"/>
+                            <constraint firstItem="ted-8i-cyA" firstAttribute="top" secondItem="Ehg-4Z-91x" secondAttribute="bottom" constant="8" id="uLt-y8-Ap9"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Create or Update Nickname" id="3GL-52-v0g"/>
+                    <connections>
+                        <outlet property="nicknameTextField" destination="Ehg-4Z-91x" id="X1V-dm-r3q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XFO-Az-wgn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -172,20 +214,26 @@
                                             <segue destination="RY6-vo-mTW" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="Q1s-IA-y5c"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="lSg-bE-LaH" style="IBUITableViewCellStyleDefault" id="34y-w5-gd8">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="lSg-bE-LaH" imageView="ue8-0G-ckr" style="IBUITableViewCellStyleDefault" id="34y-w5-gd8">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="34y-w5-gd8" id="in2-4J-rLw">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Friends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lSg-bE-LaH">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Connect" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lSg-bE-LaH">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Clipboard" id="ue8-0G-ckr">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <segue destination="vrH-EU-3Kb" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="f4Y-oh-N16"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="agh-bP-Xga" style="IBUITableViewCellStyleDefault" id="EdS-oE-3Aa">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -251,6 +299,39 @@
             </objects>
             <point key="canvasLocation" x="558" y="109"/>
         </scene>
+        <!--Make a Connection-->
+        <scene sceneID="H5c-TW-ynM">
+            <objects>
+                <viewController id="psh-lP-FG0" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="AGR-6W-ans"/>
+                        <viewControllerLayoutGuide type="bottom" id="FAa-al-5gb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tTW-94-fUJ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter a nickname to make a connection" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6B-Jx-ELz">
+                                <rect key="frame" x="148" y="72" width="304" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="pending connections" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCA-D1-JpO">
+                                <rect key="frame" x="220" y="559" width="161" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Make a Connection" id="CcY-BM-lNv"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Gk-v7-vCw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2095" y="-1423"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="faq-hr-mq7">
             <objects>
@@ -269,10 +350,30 @@
             </objects>
             <point key="canvasLocation" x="1277" y="-739"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="yw6-qf-8M0">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vrH-EU-3Kb" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7dT-zC-mli">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="psh-lP-FG0" kind="relationship" relationship="rootViewController" id="7Sd-mg-Tdk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q2n-EN-hn7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1277" y="-1415"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Atomic" width="150" height="150"/>
+        <image name="Clipboard" width="150" height="150"/>
         <image name="hamburger-icon" width="22" height="22"/>
+        <image name="landscape-with-pin" width="541" height="243"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="BLr-VE-ezK"/>
