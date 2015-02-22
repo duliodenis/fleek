@@ -3,7 +3,7 @@
 //  fleek
 //
 //  Created by Dulio Denis on 2/18/15.
-//  Copyright (c) 2015 ddApps. All rights reserved.
+//  Copyright (c) 2015 ddApps. See included LICENSE file.
 //
 
 #import <Parse/Parse.h>
@@ -13,20 +13,26 @@
 @interface NicknameViewController () <SWRevealViewControllerDelegate>
 @property (nonatomic) NSString* nickname;
 @property (weak, nonatomic) IBOutlet UITextField *nicknameTextField;
-
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *menuBarButton;
 @end
 
 @implementation NicknameViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // The Menu Bar Button
     self.revealViewController.delegate = self;
     [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+    self.menuBarButton.target = self.revealViewController;
+    self.menuBarButton.action = @selector(revealToggle:);
     
     // PFQuery *query = [PFQuery queryWithClassName:@"User"];
     PFQuery *query = [PFUser query];
     PFUser *user = [PFUser currentUser];
-    [query whereKey:@"objectId" equalTo:user.objectId];
+    
+    // Anonymous users have null objectID throwing uncaught exception when comparing
+    if (user.objectId) [query whereKey:@"objectId" equalTo:user.objectId];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {

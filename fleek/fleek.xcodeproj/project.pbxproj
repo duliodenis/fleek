@@ -38,6 +38,9 @@
 		6C6D9E6C1A781AC2001B532D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C6D9E6B1A781AC2001B532D /* CoreLocation.framework */; };
 		6CBC1C511A7A869E00673826 /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBC1C501A7A869E00673826 /* SearchResultsViewController.m */; };
 		6CCEE71B1A814C9F000BCFCA /* LocationAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCEE71A1A814C9F000BCFCA /* LocationAnnotationView.m */; };
+		6CD28ACF1A97CADA0034F195 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CD28ACE1A97CADA0034F195 /* Crashlytics.framework */; };
+		6CD28AD21A97D46D0034F195 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD28AD11A97D46D0034F195 /* AboutViewController.m */; };
+		6CD28AD51A97E18E0034F195 /* FriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD28AD41A97E18E0034F195 /* FriendViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +96,11 @@
 		6CBC1C501A7A869E00673826 /* SearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsViewController.m; sourceTree = "<group>"; };
 		6CCEE7191A814C9F000BCFCA /* LocationAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationAnnotationView.h; sourceTree = "<group>"; };
 		6CCEE71A1A814C9F000BCFCA /* LocationAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationAnnotationView.m; sourceTree = "<group>"; };
+		6CD28ACE1A97CADA0034F195 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		6CD28AD01A97D46D0034F195 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		6CD28AD11A97D46D0034F195 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		6CD28AD31A97E18E0034F195 /* FriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendViewController.h; sourceTree = "<group>"; };
+		6CD28AD41A97E18E0034F195 /* FriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +114,7 @@
 				6C45E60C1A85939F0021A6F7 /* AudioToolbox.framework in Frameworks */,
 				6C45E6171A8593D50021A6F7 /* ParseCrashReporting.framework in Frameworks */,
 				6C45E60A1A8593960021A6F7 /* CFNetwork.framework in Frameworks */,
+				6CD28ACF1A97CADA0034F195 /* Crashlytics.framework in Frameworks */,
 				6C6D9E6A1A781A96001B532D /* MapKit.framework in Frameworks */,
 				6C45E6081A85937C0021A6F7 /* CoreGraphics.framework in Frameworks */,
 				6C45E6161A8593D50021A6F7 /* Parse.framework in Frameworks */,
@@ -147,6 +156,10 @@
 		6C52E1091A951E8C00123AAB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				6CD28AD01A97D46D0034F195 /* AboutViewController.h */,
+				6CD28AD11A97D46D0034F195 /* AboutViewController.m */,
+				6CD28AD31A97E18E0034F195 /* FriendViewController.h */,
+				6CD28AD41A97E18E0034F195 /* FriendViewController.m */,
 				6C46EEC41A8AC33B00FB74DD /* MapViewController.h */,
 				6C46EEC51A8AC33B00FB74DD /* MapViewController.m */,
 				6CBC1C4F1A7A869E00673826 /* SearchResultsViewController.h */,
@@ -225,6 +238,7 @@
 		6CD7387E1A7964150072D0DD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6CD28ACE1A97CADA0034F195 /* Crashlytics.framework */,
 				6C45E60F1A8593D50021A6F7 /* parse-library-1.6.2 */,
 				6C45E60D1A8593AF0021A6F7 /* libsqlite3.0.dylib */,
 				6C45E60B1A85939F0021A6F7 /* AudioToolbox.framework */,
@@ -254,6 +268,7 @@
 				6C6D9E3C1A781A7D001B532D /* Sources */,
 				6C6D9E3D1A781A7D001B532D /* Frameworks */,
 				6C6D9E3E1A781A7D001B532D /* Resources */,
+				6CD28ACD1A97CA700034F195 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -347,11 +362,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6CD28ACD1A97CA700034F195 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run d3799712ccbbeb53c74ea0e5d477fbba0e9df26e 7f8144b638c1e140df18af3ba968ff98684c27dc9361717f80c52752b0f16390";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6C6D9E3C1A781A7D001B532D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CD28AD21A97D46D0034F195 /* AboutViewController.m in Sources */,
 				6C52E10C1A95470900123AAB /* NicknameViewController.m in Sources */,
 				6C40371F1A93D0860091F6FE /* SWRevealViewController.m in Sources */,
 				6C6D9E491A781A7D001B532D /* AppDelegate.m in Sources */,
@@ -359,6 +391,7 @@
 				6C6D9E461A781A7D001B532D /* main.m in Sources */,
 				6CCEE71B1A814C9F000BCFCA /* LocationAnnotationView.m in Sources */,
 				6CBC1C511A7A869E00673826 /* SearchResultsViewController.m in Sources */,
+				6CD28AD51A97E18E0034F195 /* FriendViewController.m in Sources */,
 				6C46EEC61A8AC33B00FB74DD /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,13 +514,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/parse-library-1.6.2",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = fleek/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -495,13 +533,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/parse-library-1.6.2",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = fleek/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
