@@ -1,5 +1,5 @@
 # fleek
-fleek is an iOS App that uses Apple Maps to help you discover new places and exciting adventures. 
+fleek is a location-based social iOS app designed to help people discover what they want to do together.
 
 ![](https://raw.githubusercontent.com/duliodenis/fleek/master/art/wireframe/fleek-01.png)
 
@@ -23,6 +23,8 @@ The project's eight user stories are:
 | 8      | Delete | As a user, I want to be able to delete any POI or Category. |
 
 These are ordered with core functionality at the top, and additional features towards the bottom. That is, some later stories rely on the completion of the initial stories.
+
+To review the design decisions made and the database design you can check the [design doc](https://github.com/duliodenis/fleek/blob/master/DesignDoc.md).
 
 ### Support or Contact
 Visit [ddApps.co](http://ddapps.co) to see more.
