@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Xac-Cu-G7J">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Xac-Cu-G7J">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
@@ -424,14 +424,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pending connections" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCA-D1-JpO">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pending connections" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCA-D1-JpO">
                                 <rect key="frame" x="220" y="559" width="161" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter a nickname to hook-up with a new friend" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6B-Jx-ELz">
-                                <rect key="frame" x="121" y="72" width="358" height="21"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the nickname of your hook-up" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OEh-Kz-dxa">
+                                <rect key="frame" x="174" y="77" width="253" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnI-6v-b1U">
+                                <rect key="frame" x="174" y="149" width="253" height="30"/>
+                                <state key="normal" title="Hook-Up">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="makeFriend:" destination="psh-lP-FG0" eventType="touchUpInside" id="10m-Aw-VK3"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYQ-oJ-al8">
+                                <rect key="frame" x="275" y="289" width="50" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -439,17 +453,25 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="bCA-D1-JpO" secondAttribute="bottom" constant="20" symbolic="YES" id="1Yc-FI-u6l"/>
-                            <constraint firstItem="u6B-Jx-ELz" firstAttribute="centerX" secondItem="tTW-94-fUJ" secondAttribute="centerX" id="4fE-eu-mw6"/>
-                            <constraint firstItem="u6B-Jx-ELz" firstAttribute="top" secondItem="AGR-6W-ans" secondAttribute="bottom" constant="8" id="9Wz-3z-vi6"/>
-                            <constraint firstItem="u6B-Jx-ELz" firstAttribute="centerX" secondItem="bCA-D1-JpO" secondAttribute="centerX" id="dXG-WO-H8Z"/>
+                            <constraint firstItem="lnI-6v-b1U" firstAttribute="centerX" secondItem="tTW-94-fUJ" secondAttribute="centerX" id="9hf-p7-V3h"/>
+                            <constraint firstItem="lnI-6v-b1U" firstAttribute="top" secondItem="OEh-Kz-dxa" secondAttribute="bottom" constant="42" id="Wdk-sy-4nx"/>
+                            <constraint firstItem="OEh-Kz-dxa" firstAttribute="top" secondItem="AGR-6W-ans" secondAttribute="bottom" constant="13" id="ZGf-Xm-2fN"/>
+                            <constraint firstItem="nYQ-oJ-al8" firstAttribute="centerX" secondItem="lnI-6v-b1U" secondAttribute="centerX" id="bgO-9n-Vxr"/>
+                            <constraint firstItem="lnI-6v-b1U" firstAttribute="leading" secondItem="OEh-Kz-dxa" secondAttribute="leading" id="iQg-fw-OaQ"/>
+                            <constraint firstItem="bCA-D1-JpO" firstAttribute="centerX" secondItem="lnI-6v-b1U" secondAttribute="centerX" id="nT2-hu-JTG"/>
+                            <constraint firstItem="lnI-6v-b1U" firstAttribute="trailing" secondItem="OEh-Kz-dxa" secondAttribute="trailing" id="os7-j1-KUE"/>
+                            <constraint firstAttribute="centerY" secondItem="nYQ-oJ-al8" secondAttribute="centerY" constant="0.5" id="vI0-yQ-ctN"/>
+                            <constraint firstAttribute="bottom" secondItem="bCA-D1-JpO" secondAttribute="bottom" constant="20" symbolic="YES" id="yQH-cw-xPa"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Make a Connection" id="CcY-BM-lNv">
                         <barButtonItem key="leftBarButtonItem" image="hamburger-icon" id="vGh-pJ-ASU"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="friendNameText" destination="OEh-Kz-dxa" id="zyr-cM-fyN"/>
                         <outlet property="menuBarButton" destination="vGh-pJ-ASU" id="LCO-3n-Q9f"/>
+                        <outlet property="pendingFriendsLabel" destination="bCA-D1-JpO" id="Ztp-ha-Wqw"/>
+                        <outlet property="statusLabel" destination="nYQ-oJ-al8" id="0xS-B8-QcK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Gk-v7-vCw" userLabel="First Responder" sceneMemberID="firstResponder"/>
