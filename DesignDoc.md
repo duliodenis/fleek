@@ -29,6 +29,8 @@ If User A and User B are friends then the data would look as follows:
 
 Note: In the above example User C and D do not belong to a friend group.
 
+There is a **status** column in the class in order to present the two stages of *invite pending* and *friend confirmation*.  Communications checks this status column and can only initiaite communications to a confirmed friend.
+
 ### Friend Groups
 
 The **FriendGroup** class is used to keep unique group IDs and to support the naming of a group.
