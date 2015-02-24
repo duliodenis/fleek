@@ -3,7 +3,7 @@
 //  fleek
 //
 //  Created by Dulio Denis on 2/10/15.
-//  Copyright (c) 2015 ddApps. All rights reserved.
+//  Copyright (c) 2015 ddApps. See included LICENSE file.
 //
 
 #import <CoreLocation/CoreLocation.h>
@@ -28,7 +28,28 @@
     self.currentAnnotation = nil;
     self.mapView.delegate = self;
     
-    // The Menu Bar Button
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    
+    // The right bar button items: Favorites List, Search
+    UIButton *searchButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [searchButton setBackgroundImage:[UIImage imageNamed:@"find"] forState:UIControlStateNormal];
+    [searchButton setFrame:CGRectMake(0, 0, 22, 22)];
+    UIBarButtonItem *searchBarButton= [[UIBarButtonItem alloc] initWithCustomView:searchButton];
+    UIButton *favoritesButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [favoritesButton setBackgroundImage:[UIImage imageNamed:@"list"] forState:UIControlStateNormal];
+    [favoritesButton setFrame:CGRectMake(0, 0, 22, 22)];
+    UIBarButtonItem *favoritesBarButton= [[UIBarButtonItem alloc] initWithCustomView:favoritesButton];
+    
+    [searchButton addTarget:self
+                 action:@selector(searchMap)
+       forControlEvents:UIControlEventTouchUpInside];
+    [favoritesButton addTarget:self
+                     action:@selector(listFavorites)
+           forControlEvents:UIControlEventTouchUpInside];
+    
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:searchBarButton, favoritesBarButton, nil];
+    
+    // The Left Bar Button: the Menu
     self.revealViewController.delegate = self;
     self.menuBarButton.target = self.revealViewController;
     self.menuBarButton.action = @selector(revealToggle:);
@@ -111,12 +132,7 @@
     [poi setObject:self.currentAnnotation.title forKey:@"name"];
     [poi setObject:self.currentAnnotation.subtitle forKey:@"subtitle"];
     [poi setObject:user forKey:@"user"];
-/*
-    NSNumber *latituteNumber = [NSNumber numberWithDouble:self.currentAnnotation.coordinate.latitude];
-    NSNumber *longitudeNumber = [NSNumber numberWithDouble:self.currentAnnotation.coordinate.longitude];
-    [poi setObject:latituteNumber forKey:@"Latitude"];
-    [poi setObject:longitudeNumber forKey:@"Longitude"];
-*/
+
     PFGeoPoint *locationCoordinate = [PFGeoPoint new];
     locationCoordinate.longitude = self.currentAnnotation.coordinate.longitude;
     locationCoordinate.latitude = self.currentAnnotation.coordinate.latitude;
@@ -166,9 +182,10 @@
 }
 
 
-#pragma mark - Segue Method
+#pragma mark - Right Bar Button Methods
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)searchMap {
+    NSLog(@"In searchMap");
     MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
     request.naturalLanguageQuery = @"Restaurants";
     request.region = self.mapView.region;
@@ -178,11 +195,17 @@
     
     MKLocalSearch *search = [[MKLocalSearch alloc] initWithRequest:request];
     [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
-        SearchResultsViewController *destinationVC = [segue destinationViewController];
+        SearchResultsViewController *destinationVC = [self.storyboard instantiateViewControllerWithIdentifier:@"searchViewController"];
         locationData.searchResults = (NSMutableArray *)response.mapItems;
         [destinationVC setLocationData:locationData];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
+        [self.navigationController pushViewController:destinationVC animated:YES];
     }];
+}
+
+
+- (void)listFavorites {
+    NSLog(@"Invoke the List Favorites View Controller");
 }
 
 

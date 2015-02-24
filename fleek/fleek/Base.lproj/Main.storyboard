@@ -85,7 +85,7 @@
             </objects>
             <point key="canvasLocation" x="2097" y="-663"/>
         </scene>
-        <!--fleek-->
+        <!--Places-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="MapViewController" sceneMemberID="viewController">
@@ -103,13 +103,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="fleek" id="2UJ-CH-ulY">
+                    <navigationItem key="navigationItem" title="Places" id="2UJ-CH-ulY">
                         <barButtonItem key="leftBarButtonItem" image="hamburger-icon" id="DPR-04-G37"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="RDf-Pi-Lfx">
-                            <connections>
-                                <segue destination="seh-nA-5mL" kind="show" id="EPG-ba-dHn"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="N97-au-QAg" id="SeF-GO-KIr"/>
@@ -123,7 +118,7 @@
         <!--Search-->
         <scene sceneID="s9c-z9-FXS">
             <objects>
-                <viewController id="seh-nA-5mL" customClass="SearchResultsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="searchViewController" id="seh-nA-5mL" customClass="SearchResultsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oTd-2o-wzM"/>
                         <viewControllerLayoutGuide type="bottom" id="uK7-fK-KTX"/>
@@ -132,7 +127,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="E2E-1F-k4T">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="E2E-1F-k4T">
                                 <rect key="frame" x="0.0" y="108" width="600" height="492"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -145,7 +140,7 @@
                                 </prototypes>
                                 <sections/>
                             </tableView>
-                            <searchBar contentMode="redraw" placeholder="Look for things on fleek..." translatesAutoresizingMaskIntoConstraints="NO" id="hpU-vr-BBk">
+                            <searchBar contentMode="redraw" misplaced="YES" placeholder="Look for things on fleek..." translatesAutoresizingMaskIntoConstraints="NO" id="hpU-vr-BBk">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>

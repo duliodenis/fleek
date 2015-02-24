@@ -3,7 +3,7 @@
 //  fleek
 //
 //  Created by Dulio Denis on 1/29/15.
-//  Copyright (c) 2015 ddApps. All rights reserved.
+//  Copyright (c) 2015 ddApps. See included LICENSE file.
 //
 
 #import <MapKit/MapKit.h>
@@ -22,7 +22,7 @@
 @implementation SearchResultsViewController
 
 
-#pragma mark - ViewL:ifecycle Methods
+#pragma mark - ViewLifecycle Methods
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
