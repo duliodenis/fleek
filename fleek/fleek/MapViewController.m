@@ -36,7 +36,7 @@
     [searchButton setFrame:CGRectMake(0, 0, 22, 22)];
     UIBarButtonItem *searchBarButton= [[UIBarButtonItem alloc] initWithCustomView:searchButton];
     UIButton *favoritesButton =  [UIButton buttonWithType:UIButtonTypeCustom];
-    [favoritesButton setBackgroundImage:[UIImage imageNamed:@"list"] forState:UIControlStateNormal];
+    [favoritesButton setBackgroundImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
     [favoritesButton setFrame:CGRectMake(0, 0, 22, 22)];
     UIBarButtonItem *favoritesBarButton= [[UIBarButtonItem alloc] initWithCustomView:favoritesButton];
     
@@ -206,6 +206,8 @@
 
 - (void)listFavorites {
     NSLog(@"Invoke the List Favorites View Controller");
+    
+    
 }
 
 
