@@ -47,6 +47,7 @@
 		6CDB9DA41A9E9E27009A5B4C /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDB9D9C1A9E9E27009A5B4C /* SWTableViewCell.m */; };
 		6CDB9DA51A9E9E27009A5B4C /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDB9D9E1A9E9E27009A5B4C /* SWUtilityButtonTapGestureRecognizer.m */; };
 		6CDB9DA61A9E9E27009A5B4C /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDB9DA01A9E9E27009A5B4C /* SWUtilityButtonView.m */; };
+		6CDB9DA91A9E9FA3009A5B4C /* FavoritesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDB9DA81A9E9FA3009A5B4C /* FavoritesTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,8 @@
 		6CDB9D9E1A9E9E27009A5B4C /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWUtilityButtonTapGestureRecognizer.m; path = SWTableViewCell/SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
 		6CDB9D9F1A9E9E27009A5B4C /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWUtilityButtonView.h; path = SWTableViewCell/SWUtilityButtonView.h; sourceTree = "<group>"; };
 		6CDB9DA01A9E9E27009A5B4C /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWUtilityButtonView.m; path = SWTableViewCell/SWUtilityButtonView.m; sourceTree = "<group>"; };
+		6CDB9DA71A9E9FA3009A5B4C /* FavoritesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesTableViewCell.h; sourceTree = "<group>"; };
+		6CDB9DA81A9E9FA3009A5B4C /* FavoritesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +185,8 @@
 				6C46EEC51A8AC33B00FB74DD /* MapViewController.m */,
 				6CBC1C4F1A7A869E00673826 /* SearchResultsViewController.h */,
 				6CBC1C501A7A869E00673826 /* SearchResultsViewController.m */,
+				6CDB9DA71A9E9FA3009A5B4C /* FavoritesTableViewCell.h */,
+				6CDB9DA81A9E9FA3009A5B4C /* FavoritesTableViewCell.m */,
 				6C52E10A1A95470900123AAB /* NicknameViewController.h */,
 				6C52E10B1A95470900123AAB /* NicknameViewController.m */,
 			);
@@ -425,6 +430,7 @@
 				6CD28AD21A97D46D0034F195 /* AboutViewController.m in Sources */,
 				6C52E10C1A95470900123AAB /* NicknameViewController.m in Sources */,
 				6C40371F1A93D0860091F6FE /* SWRevealViewController.m in Sources */,
+				6CDB9DA91A9E9FA3009A5B4C /* FavoritesTableViewCell.m in Sources */,
 				6CDB9DA31A9E9E27009A5B4C /* SWLongPressGestureRecognizer.m in Sources */,
 				6CDB9DA11A9E9E27009A5B4C /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				6CDB9DA61A9E9E27009A5B4C /* SWUtilityButtonView.m in Sources */,

@@ -12,6 +12,7 @@
 #import "MapViewController.h"
 #import "LocationData.h"
 #import "LocationAnnotationView.h"
+#import "SWTableViewCell.h"
 
 
 @interface SearchResultsViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
