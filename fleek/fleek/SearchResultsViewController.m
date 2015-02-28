@@ -13,9 +13,10 @@
 #import "LocationData.h"
 #import "LocationAnnotationView.h"
 #import "SWTableViewCell.h"
+#import "FavoritesTableViewCell.h"
 
 
-@interface SearchResultsViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
+@interface SearchResultsViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SWTableViewCellDelegate>
 @property (nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) IBOutlet UISearchBar *searchBar;
 @end
@@ -48,14 +49,17 @@
 #pragma mark - UITableViewDataSource Delegate Methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *cellIdentifier = @"Cell";
+    FavoritesTableViewCell *cell = (FavoritesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[FavoritesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
     MKMapItem *mapItem = self.locationData.searchResults[indexPath.row];
-    cell.textLabel.text = mapItem.name;
+    cell.title.text = mapItem.name;
+    cell.subtitle.text = mapItem.placemark.title;
+
+    cell.delegate = self;
     return cell;
 }
 
@@ -97,12 +101,15 @@
     [self.searchBar resignFirstResponder];
     
     MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
-        request.naturalLanguageQuery = searchBar.text;
-        request.region = self.locationData.region;
-        MKLocalSearch *search = [[MKLocalSearch alloc] initWithRequest:request];
-        [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
-            self.locationData.searchResults = (NSMutableArray *)response.mapItems;
+    request.naturalLanguageQuery = searchBar.text;
+    request.region = self.locationData.region;
+    
+    MKLocalSearch *search = [[MKLocalSearch alloc] initWithRequest:request];
+    [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
+        self.locationData.searchResults = (NSMutableArray *)response.mapItems;
+        dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
+        });
     }];
 }
 

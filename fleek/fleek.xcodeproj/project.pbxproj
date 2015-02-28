@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C0CAA2A1AA277A600DBF036 /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C0CAA291AA277A600DBF036 /* FavoritesViewController.m */; };
 		6C2410341A7BED7D00D407EA /* LocationData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C2410331A7BED7D00D407EA /* LocationData.m */; };
 		6C40371F1A93D0860091F6FE /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C40371E1A93D0860091F6FE /* SWRevealViewController.m */; };
 		6C45E5F81A8593100021A6F7 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C45E5F71A8593100021A6F7 /* Social.framework */; };
@@ -61,6 +62,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6C0CAA281AA277A600DBF036 /* FavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesViewController.h; sourceTree = "<group>"; };
+		6C0CAA291AA277A600DBF036 /* FavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesViewController.m; sourceTree = "<group>"; };
 		6C2410321A7BED7D00D407EA /* LocationData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationData.h; sourceTree = "<group>"; };
 		6C2410331A7BED7D00D407EA /* LocationData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationData.m; sourceTree = "<group>"; };
 		6C40371D1A93D0860091F6FE /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
@@ -185,6 +188,8 @@
 				6C46EEC51A8AC33B00FB74DD /* MapViewController.m */,
 				6CBC1C4F1A7A869E00673826 /* SearchResultsViewController.h */,
 				6CBC1C501A7A869E00673826 /* SearchResultsViewController.m */,
+				6C0CAA281AA277A600DBF036 /* FavoritesViewController.h */,
+				6C0CAA291AA277A600DBF036 /* FavoritesViewController.m */,
 				6CDB9DA71A9E9FA3009A5B4C /* FavoritesTableViewCell.h */,
 				6CDB9DA81A9E9FA3009A5B4C /* FavoritesTableViewCell.m */,
 				6C52E10A1A95470900123AAB /* NicknameViewController.h */,
@@ -217,7 +222,6 @@
 			children = (
 				6C6D9E4D1A781A7D001B532D /* Main.storyboard */,
 				6C52E1091A951E8C00123AAB /* ViewControllers */,
-				6CDB9D941A9E9DB6009A5B4C /* SWTableViewCell */,
 				6CCEE7191A814C9F000BCFCA /* LocationAnnotationView.h */,
 				6CCEE71A1A814C9F000BCFCA /* LocationAnnotationView.m */,
 				6C2410321A7BED7D00D407EA /* LocationData.h */,
@@ -236,6 +240,7 @@
 				6C6D9E481A781A7D001B532D /* AppDelegate.m */,
 				6C40371D1A93D0860091F6FE /* SWRevealViewController.h */,
 				6C40371E1A93D0860091F6FE /* SWRevealViewController.m */,
+				6CDB9D941A9E9DB6009A5B4C /* SWTableViewCell */,
 				6C6D9E441A781A7D001B532D /* Info.plist */,
 				6C6D9E451A781A7D001B532D /* main.m */,
 			);
@@ -441,6 +446,7 @@
 				6CCEE71B1A814C9F000BCFCA /* LocationAnnotationView.m in Sources */,
 				6CBC1C511A7A869E00673826 /* SearchResultsViewController.m in Sources */,
 				6CDB9DA21A9E9E27009A5B4C /* SWCellScrollView.m in Sources */,
+				6C0CAA2A1AA277A600DBF036 /* FavoritesViewController.m in Sources */,
 				6CDB9DA41A9E9E27009A5B4C /* SWTableViewCell.m in Sources */,
 				6CD28AD51A97E18E0034F195 /* FriendViewController.m in Sources */,
 				6C46EEC61A8AC33B00FB74DD /* MapViewController.m in Sources */,

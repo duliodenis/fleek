@@ -11,6 +11,7 @@
 #import "MapViewController.h"
 #import "LocationData.h"
 #import "SearchResultsViewController.h"
+#import "FavoritesViewController.h"
 #import "LocationAnnotationView.h"
 #import "SWRevealViewController.h"
 
@@ -185,29 +186,22 @@
 #pragma mark - Right Bar Button Methods
 
 - (void)searchMap {
-    NSLog(@"In searchMap");
     MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
-    request.naturalLanguageQuery = @"Restaurants";
     request.region = self.mapView.region;
     
     LocationData *locationData = [[LocationData alloc] init];
     locationData.region = self.mapView.region;
     
-    MKLocalSearch *search = [[MKLocalSearch alloc] initWithRequest:request];
-    [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
-        SearchResultsViewController *destinationVC = [self.storyboard instantiateViewControllerWithIdentifier:@"searchViewController"];
-        locationData.searchResults = (NSMutableArray *)response.mapItems;
-        [destinationVC setLocationData:locationData];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
-        [self.navigationController pushViewController:destinationVC animated:YES];
-    }];
+    SearchResultsViewController *destinationVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SearchViewController"];
+    [destinationVC setLocationData:locationData];
+    [self.navigationController pushViewController:destinationVC animated:YES];
 }
 
 
 - (void)listFavorites {
-    NSLog(@"Invoke the List Favorites View Controller");
-    
-    
+    FavoritesViewController *destinationVC = [self.storyboard instantiateViewControllerWithIdentifier:@"FavoritesViewController"];
+
+    [self.navigationController pushViewController:destinationVC animated:YES];
 }
 
 
