@@ -222,10 +222,7 @@
 			children = (
 				6C6D9E4D1A781A7D001B532D /* Main.storyboard */,
 				6C52E1091A951E8C00123AAB /* ViewControllers */,
-				6CCEE7191A814C9F000BCFCA /* LocationAnnotationView.h */,
-				6CCEE71A1A814C9F000BCFCA /* LocationAnnotationView.m */,
-				6C2410321A7BED7D00D407EA /* LocationData.h */,
-				6C2410331A7BED7D00D407EA /* LocationData.m */,
+				6CF2CA611AA37C0600776E77 /* Models */,
 				6C6D9E501A781A7D001B532D /* Images.xcassets */,
 				6C6D9E521A781A7D001B532D /* LaunchScreen.xib */,
 				6C6D9E431A781A7D001B532D /* Supporting Files */,
@@ -304,6 +301,17 @@
 				6CDB9DA01A9E9E27009A5B4C /* SWUtilityButtonView.m */,
 			);
 			name = SWTableViewCell;
+			sourceTree = "<group>";
+		};
+		6CF2CA611AA37C0600776E77 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6CCEE7191A814C9F000BCFCA /* LocationAnnotationView.h */,
+				6CCEE71A1A814C9F000BCFCA /* LocationAnnotationView.m */,
+				6C2410321A7BED7D00D407EA /* LocationData.h */,
+				6C2410331A7BED7D00D407EA /* LocationData.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

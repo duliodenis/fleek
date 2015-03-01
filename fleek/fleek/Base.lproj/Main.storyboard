@@ -158,7 +158,7 @@
                                 </prototypes>
                                 <sections/>
                             </tableView>
-                            <searchBar contentMode="redraw" placeholder="Look for things on fleek..." translatesAutoresizingMaskIntoConstraints="NO" id="hpU-vr-BBk">
+                            <searchBar contentMode="redraw" placeholder="Look for places on fleek..." translatesAutoresizingMaskIntoConstraints="NO" id="hpU-vr-BBk">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
