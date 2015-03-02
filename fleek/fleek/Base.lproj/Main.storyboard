@@ -165,6 +165,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="hpU-vr-BBk" firstAttribute="top" secondItem="E2E-1F-k4T" secondAttribute="top" constant="-44" id="9Xw-4A-oNp"/>
                             <constraint firstItem="E2E-1F-k4T" firstAttribute="bottom" secondItem="uK7-fK-KTX" secondAttribute="top" id="FWt-DP-ICf"/>
                             <constraint firstItem="E2E-1F-k4T" firstAttribute="leading" secondItem="hpU-vr-BBk" secondAttribute="leading" id="RkA-3v-bjQ"/>
                             <constraint firstItem="E2E-1F-k4T" firstAttribute="leading" secondItem="z65-HT-1hP" secondAttribute="leading" id="Vnn-oQ-QhY"/>

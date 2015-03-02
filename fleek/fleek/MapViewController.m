@@ -15,12 +15,14 @@
 #import "LocationAnnotationView.h"
 #import "SWRevealViewController.h"
 
-@interface MapViewController () <CLLocationManagerDelegate, MKMapViewDelegate, UIAlertViewDelegate, SWRevealViewControllerDelegate>
+@interface MapViewController () <CLLocationManagerDelegate, MKMapViewDelegate, SWRevealViewControllerDelegate>
 @property (nonatomic) CLLocationManager *locationManager;
 @property (nonatomic) LocationAnnotationView *currentAnnotation;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *menuBarButton;
 @end
 
+NSInteger const kFavoritePlace = 0;
+NSInteger const kNotifyPlace = 1;
 
 @implementation MapViewController
 
@@ -31,7 +33,7 @@
     
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     
-    // The right bar button items: Favorites List, Search
+    // The Navigation right bar button items: Favorites List, Search
     UIButton *searchButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [searchButton setBackgroundImage:[UIImage imageNamed:@"find"] forState:UIControlStateNormal];
     [searchButton setFrame:CGRectMake(0, 0, 22, 22)];
@@ -91,7 +93,7 @@
                 // Apple's documentation says to check authorization after determining monitoring is available.
                 //            CLLocationAccuracy accuracy = 1.0;
                 //            [self.locationManager startMonitoringForRegion:region desiredAccuracy:accuracy];
-                NSLog(@"Region monitoring available.");
+                NSLog(@"Region monitoring available on this device.");
             } else {
                 NSLog(@"Warning: Region monitoring not supported on this device."); }
         }
@@ -200,7 +202,6 @@
 
 - (void)listFavorites {
     FavoritesViewController *destinationVC = [self.storyboard instantiateViewControllerWithIdentifier:@"FavoritesViewController"];
-
     [self.navigationController pushViewController:destinationVC animated:YES];
 }
 
@@ -215,17 +216,64 @@
         //cast the object to our custom class...
         LocationAnnotationView *annotation = (LocationAnnotationView *)view.annotation;
         self.currentAnnotation = annotation;
-    
-        //show one alert view with title set to annotation's title
-        //and message set to annotation's subtitle...
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:[NSString stringWithFormat:@"Save %@", annotation.title]
-                              message:@"Would you like to save this to your favorites?"
-                              delegate:self
-                              cancelButtonTitle:@"Cancel"
-                              otherButtonTitles:@"OK", nil];
-        [alert show];
+        
+        // either execute the favorite saving or the notification set-up
+        if (control.tag == kFavoritePlace) {
+            [self favoritesActionSheetForPlace:annotation.title];
+        } else if (control.tag == kNotifyPlace) {
+            [self notificationActionSheetForPlace:annotation.title];
+        }
     }
+}
+
+
+// show an action sheet with title set to annotation's title
+// to confirm saving
+- (void)favoritesActionSheetForPlace:(NSString *)place {
+    UIAlertController *favoriteActionSheet = [UIAlertController alertControllerWithTitle:@"Favorite Location"
+                                                                                 message:[NSString stringWithFormat:@"You can save %@ as a favorite place.", place]
+                                                                          preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"Yes, save this as a favorite"
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction * action) {
+                                                           [self savePOIs];
+                                                       }];
+    
+    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"No, not right now"
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {
+                                                              // Canceled the Parse Save Operation
+                                                              self.currentAnnotation = nil;
+                                                          }];
+    
+    [favoriteActionSheet addAction:saveAction];
+    [favoriteActionSheet addAction:defaultAction];
+    [self presentViewController:favoriteActionSheet animated:YES completion:nil];
+}
+
+
+// TO-DO: Refactor this common code - used in FavoritesVC
+- (void)notificationActionSheetForPlace:(NSString *)place {
+    UIAlertController *notificationActionSheet = [UIAlertController alertControllerWithTitle:@"Place Notifications"
+                                                                                     message:[NSString stringWithFormat:@"You can be notified when you are near %@", place]
+                                                                              preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *notifyAction = [UIAlertAction actionWithTitle:@"Yes, Notify Me When Near"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action) {
+                                                             
+                                                         }];
+    
+    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"No, not right now"
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {
+                                                              self.currentAnnotation = nil;
+                                                          }];
+    
+    [notificationActionSheet addAction:notifyAction];
+    [notificationActionSheet addAction:defaultAction];
+    [self presentViewController:notificationActionSheet animated:YES completion:nil];
 }
 
 
@@ -235,13 +283,18 @@
     
     MKPinAnnotationView *myPin=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"current"];
     
-    UIButton *calloutButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    UIButton *directionsButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    directionsButton.frame = CGRectMake(0, 0, 23, 23);
-    [directionsButton setBackgroundImage:[UIImage imageNamed:@"Atomic"] forState:UIControlStateNormal];
+    UIButton *notificationButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    notificationButton.frame = CGRectMake(0, 0, 23, 23);
+    notificationButton.tag = kNotifyPlace;
+    [notificationButton setBackgroundImage:[UIImage imageNamed:@"dish"] forState:UIControlStateNormal];
     
-    myPin.leftCalloutAccessoryView = directionsButton;
-    myPin.rightCalloutAccessoryView = calloutButton;
+    UIButton *favoriteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    favoriteButton.frame = CGRectMake(0, 0, 23, 23);
+    favoriteButton.tag = kFavoritePlace;
+    [favoriteButton setBackgroundImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+    
+    myPin.leftCalloutAccessoryView = favoriteButton;
+    myPin.rightCalloutAccessoryView = notificationButton;
     myPin.draggable = NO;
     myPin.highlighted = NO;
     myPin.animatesDrop= YES;
@@ -249,18 +302,6 @@
     myPin.pinColor = MKPinAnnotationColorPurple;
     
     return myPin;
-}
-
-#pragma mark - UIAlertViewDelegate Methods
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == [alertView cancelButtonIndex]) {
-        NSLog(@"Canceled the Parse Save Operation");
-        self.currentAnnotation = nil;
-    }
-    else {
-        [self savePOIs];
-    }
 }
 
 @end
