@@ -59,6 +59,14 @@
     cell.title.text = mapItem.name;
     cell.subtitle.text = mapItem.placemark.title;
 
+    // Add utility button
+    NSMutableArray *leftUtilityButtons = [NSMutableArray new];
+    
+    [leftUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:0.139 green:1.000 blue:0.190 alpha:0.700]
+                                                icon:[UIImage imageNamed:@"pinMarker"]];
+    
+    cell.leftUtilityButtons = leftUtilityButtons;
+
     cell.delegate = self;
     return cell;
 }
@@ -111,6 +119,32 @@
             [self.tableView reloadData];
         });
     }];
+}
+
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index {
+    switch (index) {
+        case 0: // Location Multi-add
+        {
+            NSInteger myVCIndex = [self.navigationController.viewControllers indexOfObject:self];
+            MapViewController *mapVC = [self.navigationController.viewControllers objectAtIndex:myVCIndex-1];
+            
+            NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+            MKMapItem *mapItem = self.locationData.searchResults[indexPath.row];
+            MKPlacemark *placemark = mapItem.placemark;
+            
+            LocationAnnotationView *annotation = [[LocationAnnotationView alloc] initWithPlacemark:placemark];
+            
+            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(placemark.coordinate, 2000, 2000);
+            [mapVC.mapView setRegion:region animated:YES];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [mapVC.mapView addAnnotation:annotation];
+            });
+        }
+        default:
+            break;
+    }
 }
 
 @end
