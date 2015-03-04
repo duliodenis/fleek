@@ -14,12 +14,15 @@
 @property (nonatomic) NSString* nickname;
 @property (weak, nonatomic) IBOutlet UITextField *nicknameTextField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *menuBarButton;
+@property (weak, nonatomic) IBOutlet UILabel *updateStatusLabel;
 @end
 
 @implementation NicknameViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.updateStatusLabel.text = @"";
     
     // The Menu Bar Button
     self.revealViewController.delegate = self;
@@ -63,8 +66,10 @@
     [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
             NSLog(@"Updated nickname on Parse Successful.");
+            self.updateStatusLabel.text = @"Update successful.";
         } else {
             NSLog(@"Update nickname to Parse Failure.");
+            self.updateStatusLabel.text = @"Update failure.";
         }
     }];
     
