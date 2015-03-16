@@ -42,6 +42,7 @@
 		6CD28ACF1A97CADA0034F195 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CD28ACE1A97CADA0034F195 /* Crashlytics.framework */; };
 		6CD28AD21A97D46D0034F195 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD28AD11A97D46D0034F195 /* AboutViewController.m */; };
 		6CD28AD51A97E18E0034F195 /* FriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD28AD41A97E18E0034F195 /* FriendViewController.m */; };
+		6CDAF2081AA8E91F000F3F62 /* GeoFencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDAF2071AA8E91F000F3F62 /* GeoFencesViewController.m */; };
 		6CDB9DA11A9E9E27009A5B4C /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDB9D961A9E9E27009A5B4C /* NSMutableArray+SWUtilityButtons.m */; };
 		6CDB9DA21A9E9E27009A5B4C /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDB9D981A9E9E27009A5B4C /* SWCellScrollView.m */; };
 		6CDB9DA31A9E9E27009A5B4C /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDB9D9A1A9E9E27009A5B4C /* SWLongPressGestureRecognizer.m */; };
@@ -111,6 +112,8 @@
 		6CD28AD11A97D46D0034F195 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		6CD28AD31A97E18E0034F195 /* FriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendViewController.h; sourceTree = "<group>"; };
 		6CD28AD41A97E18E0034F195 /* FriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendViewController.m; sourceTree = "<group>"; };
+		6CDAF2061AA8E91F000F3F62 /* GeoFencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFencesViewController.h; sourceTree = "<group>"; };
+		6CDAF2071AA8E91F000F3F62 /* GeoFencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFencesViewController.m; sourceTree = "<group>"; };
 		6CDB9D951A9E9E27009A5B4C /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+SWUtilityButtons.h"; path = "SWTableViewCell/NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
 		6CDB9D961A9E9E27009A5B4C /* NSMutableArray+SWUtilityButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+SWUtilityButtons.m"; path = "SWTableViewCell/NSMutableArray+SWUtilityButtons.m"; sourceTree = "<group>"; };
 		6CDB9D971A9E9E27009A5B4C /* SWCellScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWCellScrollView.h; path = SWTableViewCell/SWCellScrollView.h; sourceTree = "<group>"; };
@@ -188,6 +191,8 @@
 				6C46EEC51A8AC33B00FB74DD /* MapViewController.m */,
 				6CBC1C4F1A7A869E00673826 /* SearchResultsViewController.h */,
 				6CBC1C501A7A869E00673826 /* SearchResultsViewController.m */,
+				6CDAF2061AA8E91F000F3F62 /* GeoFencesViewController.h */,
+				6CDAF2071AA8E91F000F3F62 /* GeoFencesViewController.m */,
 				6C0CAA281AA277A600DBF036 /* FavoritesViewController.h */,
 				6C0CAA291AA277A600DBF036 /* FavoritesViewController.m */,
 				6CDB9DA71A9E9FA3009A5B4C /* FavoritesTableViewCell.h */,
@@ -446,6 +451,7 @@
 				6CDB9DA91A9E9FA3009A5B4C /* FavoritesTableViewCell.m in Sources */,
 				6CDB9DA31A9E9E27009A5B4C /* SWLongPressGestureRecognizer.m in Sources */,
 				6CDB9DA11A9E9E27009A5B4C /* NSMutableArray+SWUtilityButtons.m in Sources */,
+				6CDAF2081AA8E91F000F3F62 /* GeoFencesViewController.m in Sources */,
 				6CDB9DA61A9E9E27009A5B4C /* SWUtilityButtonView.m in Sources */,
 				6C6D9E491A781A7D001B532D /* AppDelegate.m in Sources */,
 				6C2410341A7BED7D00D407EA /* LocationData.m in Sources */,
@@ -590,7 +596,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b9a2b9a1-bff9-40f7-b198-1808f7fea41a";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -609,7 +615,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b9a2b9a1-bff9-40f7-b198-1808f7fea41a";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

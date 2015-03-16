@@ -12,13 +12,15 @@
 #import "LocationData.h"
 #import "SearchResultsViewController.h"
 #import "FavoritesViewController.h"
+#import "GeoFencesViewController.h"
 #import "LocationAnnotationView.h"
 #import "SWRevealViewController.h"
 
 @interface MapViewController () <CLLocationManagerDelegate, MKMapViewDelegate, SWRevealViewControllerDelegate>
-@property (nonatomic) CLLocationManager *locationManager;
 @property (nonatomic) LocationAnnotationView *currentAnnotation;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *menuBarButton;
+@property (nonatomic) NSMutableArray *geofences;
+@property (nonatomic) BOOL didStartMonitoringRegion;
 @end
 
 NSInteger const kFavoritePlace = 0;
@@ -38,10 +40,16 @@ NSInteger const kNotifyPlace = 1;
     [searchButton setBackgroundImage:[UIImage imageNamed:@"find"] forState:UIControlStateNormal];
     [searchButton setFrame:CGRectMake(0, 0, 22, 22)];
     UIBarButtonItem *searchBarButton= [[UIBarButtonItem alloc] initWithCustomView:searchButton];
+    
     UIButton *favoritesButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [favoritesButton setBackgroundImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
     [favoritesButton setFrame:CGRectMake(0, 0, 22, 22)];
     UIBarButtonItem *favoritesBarButton= [[UIBarButtonItem alloc] initWithCustomView:favoritesButton];
+    
+    UIButton *geoFencesButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [geoFencesButton setBackgroundImage:[UIImage imageNamed:@"dish"] forState:UIControlStateNormal];
+    [geoFencesButton setFrame:CGRectMake(0, 0, 22, 22)];
+    UIBarButtonItem *geoFencesBarButton= [[UIBarButtonItem alloc] initWithCustomView:geoFencesButton];
     
     [searchButton addTarget:self
                  action:@selector(searchMap)
@@ -49,8 +57,11 @@ NSInteger const kNotifyPlace = 1;
     [favoritesButton addTarget:self
                      action:@selector(listFavorites)
            forControlEvents:UIControlEventTouchUpInside];
+    [geoFencesButton addTarget:self
+                        action:@selector(listGeoFences)
+              forControlEvents:UIControlEventTouchUpInside];
     
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:searchBarButton, favoritesBarButton, nil];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:searchBarButton, favoritesBarButton, geoFencesBarButton, nil];
     
     // The Left Bar Button: the Menu
     self.revealViewController.delegate = self;
@@ -81,7 +92,7 @@ NSInteger const kNotifyPlace = 1;
             CLLocationCoordinate2D center = CLLocationCoordinate2DMake(40.75, -73.98);
             CLLocationDistance radius = 30.0;
             
-            CLCircularRegion *region2 = [[CLCircularRegion alloc] initWithCenter:center
+            CLCircularRegion *monitoringCheck = [[CLCircularRegion alloc] initWithCenter:center
                                                                           radius:radius
                                                                       identifier:@"userRegion"];
             
@@ -89,11 +100,14 @@ NSInteger const kNotifyPlace = 1;
             MKCoordinateRegion region = MKCoordinateRegionMake(center, span);
             [self.mapView setRegion:region animated:YES];
             
-            if ( [CLLocationManager isMonitoringAvailableForClass:[region2 class]] ) {
+            if ( [CLLocationManager isMonitoringAvailableForClass:[monitoringCheck class]] ) {
                 // Apple's documentation says to check authorization after determining monitoring is available.
                 //            CLLocationAccuracy accuracy = 1.0;
                 //            [self.locationManager startMonitoringForRegion:region desiredAccuracy:accuracy];
                 NSLog(@"Region monitoring available on this device.");
+                // Load Geofences
+                self.geofences = [NSMutableArray arrayWithArray:[[self.locationManager monitoredRegions] allObjects]];
+                NSLog(@"geofences = %@", self.geofences);
             } else {
                 NSLog(@"Warning: Region monitoring not supported on this device."); }
         }
@@ -108,6 +122,27 @@ NSInteger const kNotifyPlace = 1;
     MKCoordinateSpan span = MKCoordinateSpanMake(0.01, 0.01);
     MKCoordinateRegion region = MKCoordinateRegionMake(center, span);
     [self.mapView setRegion:region animated:YES];
+}
+
+
+- (void)monitorThisRegion {
+    //
+    CLLocationCoordinate2D center;
+    center.latitude = self.mapView.centerCoordinate.latitude;
+    center.longitude = self.mapView.centerCoordinate.longitude;
+    MKCircle *circleOverlay = [MKCircle circleWithCenterCoordinate:center radius:300];
+    [circleOverlay setTitle:@"Circle"];
+    [self.mapView addOverlay:circleOverlay];
+    
+    //set the region
+    static NSString *myGeoFenceName = @"exampleGeofence";
+    
+    CLLocationDistance radius = 300.0;
+    CLCircularRegion *region = [[CLCircularRegion alloc] initWithCenter:center
+                                                                 radius:radius
+                                                             identifier:myGeoFenceName];
+    
+    [[self locationManager] startMonitoringForRegion:region];
 }
 
 
@@ -206,6 +241,12 @@ NSInteger const kNotifyPlace = 1;
 }
 
 
+- (void)listGeoFences {
+    GeoFencesViewController *destinationVC = [self.storyboard instantiateViewControllerWithIdentifier:@"GeoFencesViewController"];
+    [self.navigationController pushViewController:destinationVC animated:YES];
+}
+
+
 #pragma mark - Annotation Methods
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
@@ -217,11 +258,15 @@ NSInteger const kNotifyPlace = 1;
         LocationAnnotationView *annotation = (LocationAnnotationView *)view.annotation;
         self.currentAnnotation = annotation;
         
+        CLLocationCoordinate2D center = CLLocationCoordinate2DMake(annotation.coordinate.latitude, annotation.coordinate.longitude);
+        MKCoordinateSpan span = MKCoordinateSpanMake(10, 10);
+        MKCoordinateRegion region = MKCoordinateRegionMake(center, span);
+        
         // either execute the favorite saving or the notification set-up
         if (control.tag == kFavoritePlace) {
             [self favoritesActionSheetForPlace:annotation.title];
         } else if (control.tag == kNotifyPlace) {
-            [self notificationActionSheetForPlace:annotation.title];
+            [self notificationActionSheetForPlace:annotation.title inRegion:region];
         }
     }
 }
@@ -254,7 +299,7 @@ NSInteger const kNotifyPlace = 1;
 
 
 // TO-DO: Refactor this common code - used in FavoritesVC
-- (void)notificationActionSheetForPlace:(NSString *)place {
+- (void)notificationActionSheetForPlace:(NSString *)place inRegion:(MKCoordinateRegion)region {
     UIAlertController *notificationActionSheet = [UIAlertController alertControllerWithTitle:@"Place Notifications"
                                                                                      message:[NSString stringWithFormat:@"You can be notified when you are near %@", place]
                                                                               preferredStyle:UIAlertControllerStyleActionSheet];
@@ -262,7 +307,10 @@ NSInteger const kNotifyPlace = 1;
     UIAlertAction *notifyAction = [UIAlertAction actionWithTitle:@"Yes, Notify Me When Near"
                                                            style:UIAlertActionStyleDefault
                                                          handler:^(UIAlertAction * action) {
-                                                             
+                                                             // Start Monitoring Region
+                                                      //       CLRegion *regionToMonitor = [CLRegion alloc] init
+                                                      //       [self.locationManager startMonitoringForRegion:<#(CLRegion *)#>];
+                                                             [self monitorThisRegion];
                                                          }];
     
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"No, not right now"
