@@ -15,12 +15,19 @@
 @property (weak, nonatomic) IBOutlet UITextField *nicknameTextField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *menuBarButton;
 @property (weak, nonatomic) IBOutlet UILabel *updateStatusLabel;
+@property (nonatomic) UIImageView *backgroundImage;
 @end
 
 @implementation NicknameViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"profileBackground"] highlightedImage:nil];
+    self.backgroundImage.contentMode = UIViewContentModeCenter;
+
+    [self.view addSubview:self.backgroundImage];
+    [self.view sendSubviewToBack:self.backgroundImage];
     
     self.updateStatusLabel.text = @"";
     
