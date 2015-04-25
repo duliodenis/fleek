@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C026E861AEC0B3000A5707E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C026E851AEC0B3000A5707E /* Fabric.framework */; };
+		6C026E881AEC0C3700A5707E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C026E871AEC0C3700A5707E /* Crashlytics.framework */; };
 		6C0CAA2A1AA277A600DBF036 /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C0CAA291AA277A600DBF036 /* FavoritesViewController.m */; };
 		6C2410341A7BED7D00D407EA /* LocationData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C2410331A7BED7D00D407EA /* LocationData.m */; };
 		6C40371F1A93D0860091F6FE /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C40371E1A93D0860091F6FE /* SWRevealViewController.m */; };
@@ -39,7 +41,6 @@
 		6C6D9E6C1A781AC2001B532D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C6D9E6B1A781AC2001B532D /* CoreLocation.framework */; };
 		6CBC1C511A7A869E00673826 /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBC1C501A7A869E00673826 /* SearchResultsViewController.m */; };
 		6CCEE71B1A814C9F000BCFCA /* LocationAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCEE71A1A814C9F000BCFCA /* LocationAnnotationView.m */; };
-		6CD28ACF1A97CADA0034F195 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CD28ACE1A97CADA0034F195 /* Crashlytics.framework */; };
 		6CD28AD21A97D46D0034F195 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD28AD11A97D46D0034F195 /* AboutViewController.m */; };
 		6CD28AD51A97E18E0034F195 /* FriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD28AD41A97E18E0034F195 /* FriendViewController.m */; };
 		6CDAF2081AA8E91F000F3F62 /* GeoFencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDAF2071AA8E91F000F3F62 /* GeoFencesViewController.m */; };
@@ -63,6 +64,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6C026E851AEC0B3000A5707E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		6C026E871AEC0C3700A5707E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		6C0CAA281AA277A600DBF036 /* FavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesViewController.h; sourceTree = "<group>"; };
 		6C0CAA291AA277A600DBF036 /* FavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesViewController.m; sourceTree = "<group>"; };
 		6C2410321A7BED7D00D407EA /* LocationData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationData.h; sourceTree = "<group>"; };
@@ -107,7 +110,6 @@
 		6CBC1C501A7A869E00673826 /* SearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsViewController.m; sourceTree = "<group>"; };
 		6CCEE7191A814C9F000BCFCA /* LocationAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationAnnotationView.h; sourceTree = "<group>"; };
 		6CCEE71A1A814C9F000BCFCA /* LocationAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationAnnotationView.m; sourceTree = "<group>"; };
-		6CD28ACE1A97CADA0034F195 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		6CD28AD01A97D46D0034F195 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		6CD28AD11A97D46D0034F195 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		6CD28AD31A97E18E0034F195 /* FriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendViewController.h; sourceTree = "<group>"; };
@@ -141,7 +143,6 @@
 				6C45E60C1A85939F0021A6F7 /* AudioToolbox.framework in Frameworks */,
 				6C45E6171A8593D50021A6F7 /* ParseCrashReporting.framework in Frameworks */,
 				6C45E60A1A8593960021A6F7 /* CFNetwork.framework in Frameworks */,
-				6CD28ACF1A97CADA0034F195 /* Crashlytics.framework in Frameworks */,
 				6C6D9E6A1A781A96001B532D /* MapKit.framework in Frameworks */,
 				6C45E6081A85937C0021A6F7 /* CoreGraphics.framework in Frameworks */,
 				6C45E6161A8593D50021A6F7 /* Parse.framework in Frameworks */,
@@ -149,6 +150,8 @@
 				6C45E6191A8593D50021A6F7 /* ParseUI.framework in Frameworks */,
 				6C45E6041A8593520021A6F7 /* MobileCoreServices.framework in Frameworks */,
 				6C45E6021A8593480021A6F7 /* QuartzCore.framework in Frameworks */,
+				6C026E881AEC0C3700A5707E /* Crashlytics.framework in Frameworks */,
+				6C026E861AEC0B3000A5707E /* Fabric.framework in Frameworks */,
 				6C45E6001A85933E0021A6F7 /* Security.framework in Frameworks */,
 				6C45E5FE1A8593350021A6F7 /* StoreKit.framework in Frameworks */,
 				6C45E5FC1A85932A0021A6F7 /* SystemConfiguration.framework in Frameworks */,
@@ -269,7 +272,8 @@
 		6CD7387E1A7964150072D0DD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6CD28ACE1A97CADA0034F195 /* Crashlytics.framework */,
+				6C026E871AEC0C3700A5707E /* Crashlytics.framework */,
+				6C026E851AEC0B3000A5707E /* Fabric.framework */,
 				6C45E60F1A8593D50021A6F7 /* parse-library-1.6.2 */,
 				6C45E60D1A8593AF0021A6F7 /* libsqlite3.0.dylib */,
 				6C45E60B1A85939F0021A6F7 /* AudioToolbox.framework */,
@@ -436,7 +440,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Crashlytics.framework/run d3799712ccbbeb53c74ea0e5d477fbba0e9df26e 7f8144b638c1e140df18af3ba968ff98684c27dc9361717f80c52752b0f16390";
+			shellScript = "./Fabric.framework/run d3799712ccbbeb53c74ea0e5d477fbba0e9df26e 7f8144b638c1e140df18af3ba968ff98684c27dc9361717f80c52752b0f16390";
 		};
 /* End PBXShellScriptBuildPhase section */
 

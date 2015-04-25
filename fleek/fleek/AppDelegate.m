@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
 @interface AppDelegate ()
@@ -18,6 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Parse Anonymous Usage
+    [Fabric with:@[CrashlyticsKit]];
     [Parse setApplicationId:@"eSzBJHobsgvoUPKNg4iEbuZ2ce1RPFVmJdDPox1V" clientKey:@"BIicNk1hC9UNyfSjCaN51ahqSxk9LeeKF8w7EyhN"];
     [PFUser enableAutomaticUser];
     
