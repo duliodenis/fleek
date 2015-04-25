@@ -89,11 +89,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="N97-au-QAg">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="N97-au-QAg">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="N97-au-QAg" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="6rI-RZ-OF5"/>
+                            <constraint firstItem="N97-au-QAg" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="GO2-A8-cxy"/>
+                            <constraint firstItem="N97-au-QAg" firstAttribute="bottom" secondItem="2fi-mo-0CV" secondAttribute="top" id="gZ7-49-rS6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="N97-au-QAg" secondAttribute="trailing" constant="-16" id="sW7-wn-kxh"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Places" id="2UJ-CH-ulY">
                         <barButtonItem key="leftBarButtonItem" image="hamburger-icon" id="DPR-04-G37"/>
@@ -105,7 +111,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="700.79999999999995" y="103.18666666666667"/>
+            <point key="canvasLocation" x="700" y="103"/>
         </scene>
         <!--Search-->
         <scene sceneID="s9c-z9-FXS">
@@ -175,7 +181,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hXs-V2-cKW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1083.2" y="100.34666666666665"/>
+            <point key="canvasLocation" x="1220" y="98"/>
         </scene>
         <!--Notify Me-->
         <scene sceneID="o0F-Oe-EiT">

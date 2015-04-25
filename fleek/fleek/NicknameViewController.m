@@ -25,6 +25,12 @@
     
     self.backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"profileBackground"] highlightedImage:nil];
     self.backgroundImage.contentMode = UIViewContentModeCenter;
+    
+    // Move the background to the left in order to center photo in view
+    CGRect frame = self.view.frame;
+    frame.origin.x = -25; // Moove it to the left to clip and center a bit
+    frame.origin.y = 30; // Move it down - we have a NavBar
+    self.backgroundImage.frame = frame;
 
     [self.view addSubview:self.backgroundImage];
     [self.view sendSubviewToBack:self.backgroundImage];
