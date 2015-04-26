@@ -30,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"searchResultsBackground"]];
+    self.backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"searchResultsBackground.jpg"]];
     self.backgroundImage.contentMode = UIViewContentModeCenter;
     [self.tableView addSubview:self.backgroundImage];
     [self.tableView sendSubviewToBack:self.backgroundImage];

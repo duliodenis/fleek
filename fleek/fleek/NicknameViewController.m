@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"profileBackground"] highlightedImage:nil];
+    self.backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"profileBackground.jpg"] highlightedImage:nil];
     self.backgroundImage.contentMode = UIViewContentModeCenter;
     
     // Move the background to the left in order to center photo in view
