@@ -19,12 +19,22 @@
 @interface SearchResultsViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SWTableViewCellDelegate>
 @property (nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) IBOutlet UISearchBar *searchBar;
+@property (nonatomic) UIImageView *backgroundImage;
 @end
 
 @implementation SearchResultsViewController
 
 
 #pragma mark - ViewLifecycle Methods
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"searchResultsBackground"]];
+    self.backgroundImage.contentMode = UIViewContentModeCenter;
+    [self.tableView addSubview:self.backgroundImage];
+    [self.tableView sendSubviewToBack:self.backgroundImage];
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
